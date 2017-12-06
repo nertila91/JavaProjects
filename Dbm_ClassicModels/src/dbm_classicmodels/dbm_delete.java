@@ -10,6 +10,18 @@ import java.sql.*;
  * @author User
  */
 public class dbm_delete {
+	Connection connection = null;
+	Statement stmt = null
+	public dbm_delete(Connection conn){
+		connection = conn;
+	}
+	public void executeUpdate(String sql) throws SQLException{
+		stmt.executeUpdate(sql);
+		stmt = connection.createStatement();
+		reloadTables();
+		
+	}
+	   
     private void DeleteOrderDetailsActionPerformed(String orderNumber, String productCode) {
 		try { 
 		executeUpdate("DELETE FROM orderdetails WHERE orderNumber='" + orderNumber + "' 
@@ -17,8 +29,8 @@ public class dbm_delete {
 		}
 		catch (SQLException e) {
 		e.printStackTrace();
-		}
     }
+}
 }
 
 
